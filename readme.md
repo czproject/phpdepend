@@ -3,9 +3,12 @@ PhpDepend
 
 ``` php
 $phpdepend = new Cz\PhpDepend;
-$source = file_get_contents('MyClass.php');
+$phpdepend->parseFile('MyClass.php');
 
+/* or use
+$source = file_get_contents('MyClass.php');
 $phpdepend->parse($source);
+*/
 
 var_dump($phpdepend->getClasses()); // returns list of defined classes, interfaces & traits
 var_dump($phpdepend->getDependencies()); // returns list of required classes, interfaces & traits

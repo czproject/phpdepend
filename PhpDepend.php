@@ -69,6 +69,25 @@
 		
 		/**
 		 * @param	string
+		 * @return	bool	FALSE => file error
+		 */
+		public function parseFile($filename)
+		{
+			$source = file_get_contents($filename);
+			
+			if($source !== FALSE)
+			{
+				$this->parse($source);
+				return TRUE;
+			}
+			
+			return FALSE;
+		}
+		
+		
+		
+		/**
+		 * @param	string
 		 * @return	void
 		 */
 		public function parse($str)

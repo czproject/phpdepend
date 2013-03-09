@@ -2,7 +2,6 @@
 	/** Cz PHP Depend Class
 	 * 
 	 * @author		Jan Pecha, <janpecha@email.cz>
-	 * @version		2013-01-29-1
 	 */
 	
 	namespace Cz;

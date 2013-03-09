@@ -11,5 +11,5 @@ var_dump($phpdepend->getClasses()); // returns list of defined classes, interfac
 var_dump($phpdepend->getDependencies()); // returns list of required classes, interfaces & traits
 ```
 
-License: New BSD License
+License: [New BSD License](license.md)
 <br>Author: Jan Pecha, http://janpecha.iunas.cz/

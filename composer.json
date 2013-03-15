@@ -11,5 +11,8 @@
         "classmap": ["PhpDepend.php"]
     },
     "require": {
+    },
+    "require-dev": {
+        "nette/tester": "dev-master"
     }
 }

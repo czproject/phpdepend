@@ -62,7 +62,7 @@
 		 */
 		public function getDependencies()
 		{
-			return $this->dependencies;
+			return array_keys($this->dependencies);
 		}
 		
 		

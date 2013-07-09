@@ -440,7 +440,7 @@
 							{
 								$level--;
 								
-								if($level === 0)
+								if($level < 1)
 								{
 									return $traits;
 								}

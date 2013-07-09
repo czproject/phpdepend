@@ -1,5 +1,6 @@
 {
     "name": "czproject/phpdepend",
+    "description": "Find dependencies of PHP file.",
     "license": ["BSD-3-Clause"],
     "authors": [
         {

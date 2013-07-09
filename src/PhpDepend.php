@@ -195,7 +195,12 @@
 			
 				foreach($class as $name)
 				{
-					$this->classes[] = trim($name, '\\');
+					$name = trim($name, '\\');
+					
+					if($name !== '')
+					{
+						$this->classes[] = $name;
+					}
 				}
 			}
 			
@@ -219,7 +224,12 @@
 			
 				foreach($class as $name)
 				{
-					$this->dependencies[trim($name, '\\')] = TRUE;
+					$name = trim($name, '\\');
+					
+					if($name !== '')
+					{
+						$this->dependencies[$name] = TRUE;
+					}
 				}
 			}
 			

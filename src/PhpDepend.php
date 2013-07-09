@@ -376,9 +376,15 @@
 			while($token = $this->prev())
 			{
 				$i++;
-				if(is_array($token) && ($token[0] === T_STRING || $token[0] === self::$T_NS_SEPARATOR))
+				if(is_array($token))
 				{
-					if(!($token[1] === 'self' || $token[1] === 'parent' || $token[1] === 'static'))
+					if($token[0] === T_DOUBLE_COLON)
+					{
+						continue;
+					}
+					
+					if(($token[0] === T_STRING || $token[0] === self::$T_NS_SEPARATOR)
+						&& !($token[1] === 'self' || $token[1] === 'parent' || $token[1] === 'static'))
 					{
 						$name = $token[1] . $name;
 						continue;

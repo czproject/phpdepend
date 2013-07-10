@@ -1,6 +1,6 @@
 <?php
 /**
- * @phpversion > 5.4
+ * @phpversion >= 5.4
  */
 
 use Tester\Assert;

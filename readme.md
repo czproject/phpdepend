@@ -21,6 +21,8 @@ var_dump($phpdepend->getClasses());
 var_dump($phpdepend->getDependencies());
 ```
 
+[API documentation](http://api.iunas.cz/phpdepend/class-Cz.PhpDepend.html)
+
 
 Installation
 ------------

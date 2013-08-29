@@ -1,7 +1,7 @@
 {
     "name": "czproject/phpdepend",
     "type": "library",
-    "description": "Find dependencies of PHP file.",
+    "description": "Finds dependencies (classes, interfaces & traits) of PHP file (or code snippet).",
     "license": ["BSD-3-Clause"],
     "authors": [
         {

@@ -48,6 +48,7 @@
 		
 		
 		/**
+		 * Returns list of defined classes, interfaces & traits or NULL.
 		 * @return	string[]|NULL
 		 */
 		public function getClasses()
@@ -58,6 +59,7 @@
 		
 		
 		/**
+		 * Returns list of required classes, interfaces & traits or NULL.
 		 * @return	string[]|NULL
 		 */
 		public function getDependencies()
@@ -68,6 +70,7 @@
 		
 		
 		/**
+		 * Parses content of PHP file.
 		 * @param	string
 		 * @return	bool	FALSE => file error
 		 */
@@ -87,6 +90,7 @@
 		
 		
 		/**
+		 * Parses given PHP code.
 		 * @param	string
 		 * @return	void
 		 */

@@ -1,7 +1,7 @@
 PhpDepend
 =========
 
-Finds dependencies (classes, interfaces & traits) of PHP file (or code snippet).
+Extracts list of dependencies (classes, interfaces & traits) from PHP file or code snippet.
 
 Usage
 -----

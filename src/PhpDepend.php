@@ -101,6 +101,7 @@
 			$this->namespace = '';
 			$this->classes = array();
 			$this->dependencies = array();
+			$this->use = array();
 			$this->kill = FALSE;
 			$this->level = 0;
 			
@@ -146,7 +147,7 @@
 						}
 						else // namespace
 						{
-							$this->use = $this->readUse();
+							$this->use = array_merge($this->use, $this->readUse());
 						}
 						continue;
 					

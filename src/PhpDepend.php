@@ -269,7 +269,7 @@
 		 */
 		private function readName()
 		{
-			return $this->expandName($this->readIdentifier());
+			return $this->expandName($this->readIdentifier(TRUE));
 		}
 		
 		
@@ -299,9 +299,10 @@
 		
 		
 		/**
+		 * @param	bool
 		 * @return	string
 		 */
-		private function readIdentifier()
+		private function readIdentifier($readNamespaceKeyword = FALSE)
 		{
 			$name = FALSE;
 			while($token = $this->next())
@@ -311,11 +312,18 @@
 					$this->prev();
 					break;
 				}
+
+				if($readNamespaceKeyword && $token[0] === T_NAMESPACE)
+				{
+					$name = '\\' . $this->namespace;
+					continue;
+				}
 				
 				switch($token[0])
 				{
 					case T_STRING:
 					case self::$T_NS_SEPARATOR:
+						$readNamespaceKeyword = FALSE;
 						$name .= $token[1];
 					
 					case T_WHITESPACE:

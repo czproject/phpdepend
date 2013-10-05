@@ -32,4 +32,16 @@ Assert::same(array('Foo\\Bar\\MyClass'), $phpdepend->getClasses());
 Assert::same(array(), $phpdepend->getDependencies());
 
 
+// Class definition
+$phpdepend->parse("<?php
+namespace Foo\\Bar;
+class MyClass extends namespace\MyParent implements namespace\MyInterface {
 
+}
+");
+
+Assert::same(array('Foo\\Bar\\MyClass'), $phpdepend->getClasses());
+Assert::same(array(
+	'Foo\Bar\MyParent',
+	'Foo\Bar\MyInterface',
+), $phpdepend->getDependencies());

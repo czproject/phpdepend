@@ -21,12 +21,14 @@ $phpdepend->parse("<?php
 namespace Foo\\Bar;
 \$foo = new Foo;
 \$bar = new Bar;
+\$barfoo = new namespace\BarFoo;
 ");
 
 Assert::same(array(), $phpdepend->getClasses());
 Assert::same(array(
 	'Foo\\Bar\\Foo',
 	'Foo\\Bar\\Bar',
+	'Foo\\Bar\\BarFoo',
 ), $phpdepend->getDependencies());
 
 

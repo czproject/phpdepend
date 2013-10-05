@@ -102,10 +102,9 @@
 			$this->classes = array();
 			$this->dependencies = array();
 			$this->use = array();
-			$this->kill = FALSE;
 			$this->level = 0;
 			
-			while($token = $this->next())// && !$this->kill)
+			while($token = $this->next())
 			{
 				$tokenId = is_array($token) ? $token[0] : $token;
 				
@@ -248,11 +247,6 @@
 		 */
 		private function next()
 		{
-			if($this->kill)
-			{
-				return FALSE;
-			}
-			
 			$next = current($this->tokens);
 			next($this->tokens);
 			return $next;

@@ -133,6 +133,7 @@
 					// namespace
 					case self::$T_NAMESPACE:
 						$this->namespace = $this->readIdentifier();
+						$this->use = array();
 						continue;
 					
 					// USE keywords

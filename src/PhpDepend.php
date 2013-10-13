@@ -20,9 +20,6 @@
 		/** @var  string[] */
 		private $dependencies;
 		
-		/** @var  bool */
-		private $kill;
-		
 		/** @var  array */
 		private $tokens;
 		

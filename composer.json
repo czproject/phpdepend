@@ -12,9 +12,9 @@
     "autoload": {
         "classmap": ["src/PhpDepend.php"]
     },
-    "require": { 
-        "php": ">=5.3.0", 
-        "ext-tokenizer": "*" 
+    "require": {
+        "php": ">=5.3.0",
+        "ext-tokenizer": "*"
     },
     "require-dev": {
         "nette/tester": "0.9.3"

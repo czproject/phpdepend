@@ -21,6 +21,23 @@ var_dump($phpdepend->getClasses());
 var_dump($phpdepend->getDependencies());
 ```
 
+Recognized dependencies in PHP code:
+* inherited classes (`extends ClassParent`)
+* implemented interfaces (`implements Interface1, Interface2`)
+* used traits (`class MyClass { use Trait; }`)
+* classes of created instances (`new Object()`)
+* static classes (`StaticClass::staticMethod()`, `StaticClass::$staticProperty`)
+
+Ignored dependencies:
+* `self::` - `self` means "this class" -> useless (no dependency)
+* `parent::` - parent class is specified in `extends`
+* `static::` - `static` is dynamic-`self` -> means "this class", parent or descendant (if exists)
+
+Recognized defined classes (output of `$phpdepend->getClasses()`):
+* defined classes (`class MyClass`)
+* defined interfaces (`interface MyInterface`)
+* defined traits (`trait MyTrait`)
+
 [API documentation](http://api.iunas.cz/phpdepend/class-Cz.PhpDepend.html)
 
 

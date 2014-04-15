@@ -96,3 +96,4 @@ PHPDepend requires PHP 5.3.0 or later and enabled [Tokenizer extension](http://w
 License: [New BSD License](license.md)
 <br>Author: Jan Pecha, http://janpecha.iunas.cz/
 
+[![Build Status](https://travis-ci.org/czproject/phpdepend.svg?branch=master)](https://travis-ci.org/czproject/phpdepend)

@@ -1,5 +1,6 @@
 <?php
-require __DIR__ . '/../../vendor/nette/tester/Tester/bootstrap.php';
+require __DIR__ . '/../../vendor/autoload.php';
+Tester\Environment::setup();
 
 if (extension_loaded('xdebug'))
 {

@@ -17,6 +17,6 @@
         "ext-tokenizer": "*"
     },
     "require-dev": {
-        "nette/tester": "0.9.3"
+        "nette/tester": "~1.1"
     }
 }

@@ -26,9 +26,9 @@ Recognized dependencies in PHP code:
 * static classes (`StaticClass::staticMethod()`, `StaticClass::$staticProperty`)
 
 Ignored dependencies:
-* `self::` - `self` means "this class" -> useless (no dependency, class defined in same file)
+* `self::` - `self` means "this class" → useless (no dependency, class defined in same file)
 * `parent::` - parent class is specified in `extends`
-* `static::` - `static` is dynamic-`self` -> means "this class", parent or descendant (if exists)
+* `static::` - `static` is dynamic-`self` → means "this class", parent or descendant (if exists)
 
 Recognized defined classes (output of `$phpdepend->getClasses()`):
 * defined classes (`class MyClass`)
@@ -88,7 +88,7 @@ Installation
 composer require czproject/phpdepend
 ```
 
-PhpDepend requires PHP 5.3.0 or later and enabled [Tokenizer extension](http://www.php.net/manual/en/book.tokenizer.php) (enabled by default from PHP 4.3.0).
+PhpDepend requires PHP 5.3 or later and enabled [Tokenizer extension](http://www.php.net/manual/en/book.tokenizer.php) (enabled by default from PHP 4.3.0).
 
 
 ------------------------------

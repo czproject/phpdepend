@@ -1,8 +1,7 @@
 <?php
-	/** Cz PHP Depend Class
-	 *
-	 * @author		Jan Pecha, <janpecha@email.cz>
-	 * @license		New BSD License (BSD-3), see file license.md
+	/**
+	 * @author   Jan Pecha, <janpecha@email.cz>
+	 * @license  New BSD License (BSD-3), see file license.md
 	 */
 
 	namespace Cz;

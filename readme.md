@@ -51,14 +51,14 @@ $phpdepend->parse('
 		public function say($name)
 		{
 			if (!$name) {
-				throw new InvalidArgumentException('Invalid name');
+				throw new InvalidArgumentException("Invalid name");
 			}
 			return "Hello $name";
 		}
 	}
 
 	$greeting = new Greeting;
-	$greeting->say('John');
+	$greeting->say("John");
 ');
 
 var_dump($phpdepend->getClasses());
@@ -88,7 +88,7 @@ Installation
 composer require czproject/phpdepend
 ```
 
-PHPDepend requires PHP 5.3.0 or later and enabled [Tokenizer extension](http://www.php.net/manual/en/book.tokenizer.php) (enabled by default from PHP 4.3.0).
+PhpDepend requires PHP 5.3.0 or later and enabled [Tokenizer extension](http://www.php.net/manual/en/book.tokenizer.php) (enabled by default from PHP 4.3.0).
 
 
 ------------------------------

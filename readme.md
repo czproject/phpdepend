@@ -8,12 +8,15 @@ Usage
 
 ``` php
 $phpdepend = new Cz\PhpDepend;
+
+// file parsing
 $phpdepend->parseFile('MyClass.php');
 
-/* or use */
+// code snippet parsing
 $source = file_get_contents('MyClass.php');
 $phpdepend->parse($source);
 
+// getting result
 $phpdepend->getClasses(); // returns list of defined classes, interfaces & traits
 $phpdepend->getDependencies(); // returns list of required classes, interfaces & traits
 ```
@@ -26,7 +29,7 @@ Recognized dependencies in PHP code:
 * static classes (`StaticClass::staticMethod()`, `StaticClass::$staticProperty`)
 
 Ignored dependencies:
-* `self::` - `self` means "this class" → useless (no dependency, class defined in same file)
+* `self::` - `self` means "this class" → useless (no dependency, class is defined in same file)
 * `parent::` - parent class is specified in `extends`
 * `static::` - `static` is dynamic-`self` → means "this class", parent or descendant (if exists)
 

@@ -5,7 +5,7 @@ require __DIR__ . '/../../src/PhpDepend.php';
 
 $phpdepend = new Cz\PhpDepend;
 
-$phpdepend->parse("<?php
+$phpdepend->parse('<?php
 namespace NS1
 {
 	class MyClass implements MyInterface
@@ -36,7 +36,7 @@ namespace # global namespace
 	{
 	}
 }
-");
+');
 
 Assert::same(array(
 	'NS1\MyClass',
@@ -55,7 +55,7 @@ Assert::same(array(
 
 
 
-$phpdepend->parse("<?php
+$phpdepend->parse('<?php
 namespace NFirst;
 	class MyClass implements MyInterface
 	{
@@ -78,7 +78,7 @@ namespace; # global namespace
 	class MyGlobalClass extends NS1\NS3\ParentClass2
 	{
 	}
-");
+');
 
 Assert::same(array(
 	'NFirst\MyClass',

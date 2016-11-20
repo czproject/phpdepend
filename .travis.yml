@@ -1,16 +1,15 @@
 language: php
 php:
-    - 5.3.3
+    - 5.3
     - 5.4
     - 5.5
     - 5.6
-    - hhvm
+    - 7.0
+    - 7.1
 
-matrix:
-    allow_failures:
-        - php: hhvm
-
-script: vendor/bin/tester tests -s
+script:
+    - vendor/bin/tester tests -s -p php
+    - php temp/code-checker/src/code-checker.php
 
 after_failure:
     # Print *.actual content
@@ -18,4 +17,11 @@ after_failure:
 
 before_script:
     # Install Nette Tester
-    - composer install --no-interaction --dev --prefer-source
+    - travis_retry composer install --no-interaction --prefer-dist
+    - travis_retry composer create-project nette/code-checker temp/code-checker ~2.5.0
+
+sudo: false
+
+cache:
+    directories:
+        - $HOME/.composer/cache

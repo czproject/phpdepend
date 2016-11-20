@@ -70,4 +70,3 @@ $phpdepend->parse('<?php
 
 Assert::same(array('HelloWorld', 'MyClass1', 'MyClass2'), $phpdepend->getClasses());
 Assert::same(array('HelloWorld'), $phpdepend->getDependencies());
-

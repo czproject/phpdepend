@@ -40,4 +40,3 @@ class MyClass
 
 Assert::same(array('MyClass'), $phpdepend->getClasses());
 Assert::same(array('Foo\Bar', 'Foo', 'Foo\Bar\FooBar'), $phpdepend->getDependencies());
-

@@ -46,7 +46,7 @@
 
 		/**
 		 * Returns list of defined classes, interfaces & traits or NULL.
-		 * @return	string[]|NULL
+		 * @return string[]|NULL
 		 */
 		public function getClasses()
 		{
@@ -57,7 +57,7 @@
 
 		/**
 		 * Returns list of required classes, interfaces & traits or NULL.
-		 * @return	string[]|NULL
+		 * @return string[]|NULL
 		 */
 		public function getDependencies()
 		{
@@ -68,8 +68,8 @@
 
 		/**
 		 * Parses content of PHP file.
-		 * @param	string
-		 * @return	bool	FALSE => file error
+		 * @param  string
+		 * @return bool  FALSE => file error
 		 */
 		public function parseFile($filename)
 		{
@@ -88,8 +88,8 @@
 
 		/**
 		 * Parses given PHP code.
-		 * @param	string
-		 * @return	void
+		 * @param  string
+		 * @return void
 		 */
 		public function parse($str)
 		{
@@ -172,8 +172,8 @@
 
 
 		/**
-		 * @param	string
-		 * @return	array
+		 * @param  string
+		 * @return array
 		 */
 		private function tokensFromSource($str)
 		{
@@ -183,8 +183,8 @@
 
 
 		/**
-		 * @param	string|string[]
-		 * @return	$this
+		 * @param  string|string[]
+		 * @return $this
 		 */
 		private function addClass($class)
 		{
@@ -212,8 +212,8 @@
 
 
 		/**
-		 * @param	string|string[]
-		 * @return	$this
+		 * @param  string|string[]
+		 * @return $this
 		 */
 		private function addDependency($class)
 		{
@@ -241,7 +241,7 @@
 
 
 		/**
-		 * @return	string|array|FALSE
+		 * @return string|array|FALSE
 		 */
 		private function next()
 		{
@@ -253,7 +253,7 @@
 
 
 		/**
-		 * @return	string|array|FALSE
+		 * @return string|array|FALSE
 		 */
 		private function prev()
 		{
@@ -263,7 +263,7 @@
 
 
 		/**
-		 * @return	string|FALSE
+		 * @return string|FALSE
 		 */
 		private function readName()
 		{
@@ -273,7 +273,7 @@
 
 
 		/**
-		 * @return	string[]
+		 * @return string[]
 		 */
 		private function readImplements()
 		{
@@ -297,8 +297,8 @@
 
 
 		/**
-		 * @param	bool
-		 * @return	string
+		 * @param  bool
+		 * @return string
 		 */
 		private function readIdentifier($readNamespaceKeyword = FALSE)
 		{
@@ -339,7 +339,7 @@
 
 
 		/**
-		 * @return	array  [short-name => full-class-name, ...]
+		 * @return array  [short-name => full-class-name, ...]
 		 */
 		private function readUse()
 		{
@@ -465,8 +465,8 @@
 
 
 		/**
-		 * @param	string
-		 * @return	string
+		 * @param  string
+		 * @return string
 		 */
 		private function expandName($name)
 		{
@@ -508,4 +508,3 @@
 			return $short;
 		}
 	}
-

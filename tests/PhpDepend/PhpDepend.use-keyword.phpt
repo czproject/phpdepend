@@ -7,27 +7,27 @@ $phpdepend = new Cz\PhpDepend;
 
 
 
-$phpdepend->parse("<?php
+$phpdepend->parse('<?php
 use MyNamespace\Sub\SubClass;
 
 class MyClass implements SubClass
 {
 }
-");
+');
 
 Assert::same(array('MyClass'), $phpdepend->getClasses());
 Assert::same(array('MyNamespace\Sub\SubClass'), $phpdepend->getDependencies());
 
 
 // multiuse
-$phpdepend->parse("<?php
+$phpdepend->parse('<?php
 use NS4\NS5\NS6;
 use NS4\NS5\NS7 as NS9;
 
 class MyClass3 extends NS9\ParentClass implements NS6\FooInterface
 {
 }
-");
+');
 
 Assert::same(array('MyClass3'), $phpdepend->getClasses());
 Assert::same(array(
@@ -37,7 +37,7 @@ Assert::same(array(
 
 
 // conflicts
-$phpdepend->parse("<?php
+$phpdepend->parse('<?php
 namespace First;
 use NS4\NS5\NS6;
 use NS4\NS5\NS7 as NS9;
@@ -53,7 +53,7 @@ use MYNS\NS6;
 class MyClass2 extends NS9\ParentClass implements NS6\FooInterface
 {
 }
-");
+');
 
 Assert::same(array(
 	'First\MyClass1',

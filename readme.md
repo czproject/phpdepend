@@ -1,7 +1,21 @@
 PhpDepend
 =========
 
+[![Build Status](https://travis-ci.org/czproject/phpdepend.svg?branch=master)](https://travis-ci.org/czproject/phpdepend)
+
 Extracts list of dependencies (classes, interfaces & traits) from PHP file or code snippet.
+
+Installation
+------------
+
+[Download a latest package](https://github.com/czproject/phpdepend/releases) or use [Composer](http://getcomposer.org/):
+
+```
+composer require czproject/phpdepend
+```
+
+PhpDepend requires PHP 5.3 or later and enabled [Tokenizer extension](http://www.php.net/manual/en/book.tokenizer.php) (enabled by default from PHP 4.3.0).
+
 
 Usage
 -----
@@ -82,21 +96,7 @@ array (3) {
 ```
 
 
-Installation
-------------
-
-[Download a latest package](https://github.com/czproject/phpdepend/releases) or use [Composer](http://getcomposer.org/):
-
-```
-composer require czproject/phpdepend
-```
-
-PhpDepend requires PHP 5.3 or later and enabled [Tokenizer extension](http://www.php.net/manual/en/book.tokenizer.php) (enabled by default from PHP 4.3.0).
-
-
 ------------------------------
 
 License: [New BSD License](license.md)
 <br>Author: Jan Pecha, http://janpecha.iunas.cz/
-
-[![Build Status](https://travis-ci.org/czproject/phpdepend.svg?branch=master)](https://travis-ci.org/czproject/phpdepend)

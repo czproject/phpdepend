@@ -52,8 +52,6 @@ Recognized defined classes (output of `$phpdepend->getClasses()`):
 * defined interfaces (`interface MyInterface`)
 * defined traits (`trait MyTrait`)
 
-[API documentation](http://api.iunas.cz/phpdepend/class-Cz.PhpDepend.html)
-
 
 Example
 -------

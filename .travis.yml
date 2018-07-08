@@ -11,6 +11,8 @@ matrix:
     include:
         - php: 5.3
           dist: precise
+          before_script: travis_retry composer require nette/tester 1.7.1 --no-interaction --prefer-dist
+          script: vendor/bin/tester tests -s -p php
 
 script:
     - vendor/bin/tester tests -s -p php

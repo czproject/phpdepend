@@ -111,15 +111,15 @@
 					case T_NEW:
 					case T_EXTENDS:
 						$this->addDependency($this->readName());
-						continue;
+						break;
 
 					case T_DOUBLE_COLON:
 						$this->addDependency($this->readStaticClass());
-						continue;
+						break;
 
 					case T_IMPLEMENTS:
 						$this->addDependency($this->readImplements());
-						continue;
+						break;
 
 					// define
 					case T_CLASS:
@@ -128,13 +128,13 @@
 
 					case T_INTERFACE:
 						$this->addClass($this->namespace . '\\' . $this->readIdentifier());
-						continue;
+						break;
 
 					// namespace
 					case self::$T_NAMESPACE:
 						$this->namespace = $this->readIdentifier();
 						$this->use = array();
-						continue;
+						break;
 
 					// USE keywords
 					case T_USE:
@@ -146,7 +146,7 @@
 						{
 							$this->use = array_merge($this->use, $this->readUse());
 						}
-						continue;
+						break;
 
 					case '{':
 						$this->level++;
@@ -155,7 +155,7 @@
 						{
 							$this->inClass = $this->level;
 						}
-						continue;
+						break;
 
 					case '}':
 						if($this->inClass === $this->level)
@@ -164,7 +164,7 @@
 						}
 
 						$this->level--;
-						continue;
+						break;
 				}
 			}
 		}
@@ -325,7 +325,7 @@
 						$name .= $token[1];
 
 					case T_WHITESPACE:
-						continue;
+						break;
 
 					default:
 						$this->prev();

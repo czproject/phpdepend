@@ -410,6 +410,7 @@
 				$i--;
 			}
 
+			$this->next(); // consume content after T_DOUBLE_COLON
 			return $name;
 		}
 

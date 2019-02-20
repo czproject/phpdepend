@@ -347,9 +347,54 @@
 			$short = FALSE;
 			while($name = $this->readIdentifier())
 			{
+				$token = $this->next();
+				$wasGroup = FALSE;
+
+				if($token === '{') // group statement
+				{
+					$wasGroup = TRUE;
+					$nextToken = $this->readUseGroup($name, $use);
+
+					if ($nextToken !== NULL) {
+						$token = $nextToken;
+					}
+
+				} else {
+					$short = self::generateShort($name, TRUE);
+
+					if(is_array($token))
+					{
+						if($token[0] === T_AS)
+						{
+							$short = $this->readIdentifier();
+							$token = $this->next();
+						}
+					}
+				}
+
+				if(!$wasGroup && ($token === ',' || $token === ';'))
+				{
+					$use[$short] = $name;
+					$short = FALSE;
+				}
+			}
+
+			return $use;
+		}
+
+
+		/**
+		 * @param  string
+		 * @return mixed|NULL  token or NULL
+		 */
+		private function readUseGroup($rootName, array &$uses)
+		{
+			$token = NULL;
+			$rootName = rtrim($rootName, '\\') . '\\';
+
+			while ($name = $this->readIdentifier()) {
 				$short = self::generateShort($name, TRUE);
 				$token = $this->next();
-
 
 				if(is_array($token))
 				{
@@ -360,15 +405,19 @@
 					}
 				}
 
-				if($token === ',' || $token === ';')
+				if($token === ',' || $token === '}')
 				{
-					$use[$short] = $name;
+					$uses[$short] = $rootName . $name;
 					$short = FALSE;
-				}
 
+					if ($token === '}') {
+						$token = $this->next();
+						break;
+					}
+				}
 			}
 
-			return $use;
+			return $token;
 		}
 
 

@@ -4,7 +4,6 @@
  */
 use Tester\Assert;
 require __DIR__ . '/../bootstrap.php';
-require __DIR__ . '/../../../src/PhpDepend.php';
 
 $phpdepend = new Cz\PhpDepend;
 

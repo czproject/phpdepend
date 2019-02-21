@@ -18,3 +18,18 @@ Assert::same(array(), $phpdepend->getClasses());
 Assert::same(array(
 	'fn_a',
 ), $phpdepend->getDependencies());
+
+
+// grouped
+$phpdepend->parse('<?php
+use function NS\{funcA, funcB};
+
+$a = new funcA;
+$a = new funcB;
+');
+
+Assert::same(array(), $phpdepend->getClasses());
+Assert::same(array(
+	'funcA',
+	'funcB',
+), $phpdepend->getDependencies());

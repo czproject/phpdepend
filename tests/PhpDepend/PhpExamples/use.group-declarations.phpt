@@ -40,6 +40,7 @@ Assert::same(array(
 	'ConstC',
 ), $phpdepend->getDependencies());
 
+
 // spaces
 $phpdepend->parse('<?php
 use some\ns\{ ClassA, ClassB, ClassC as C };
@@ -56,4 +57,21 @@ Assert::same(array(
 	'some\ns\ClassB',
 	'ClassC',
 	'some\ns\ClassC',
+), $phpdepend->getDependencies());
+
+
+// subpath
+$phpdepend->parse('<?php
+use A\B\{A, B\C, C as D};
+
+$a = new A;
+$a = new C;
+$a = new D;
+');
+
+Assert::same(array(), $phpdepend->getClasses());
+Assert::same(array(
+	'A\B\A',
+	'A\B\B\C',
+	'A\B\C',
 ), $phpdepend->getDependencies());

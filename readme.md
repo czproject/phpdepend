@@ -1,7 +1,7 @@
 PhpDepend
 =========
 
-[![Build Status](https://travis-ci.org/czproject/phpdepend.svg?branch=master)](https://travis-ci.org/czproject/phpdepend)
+[![Tests Status](https://github.com/czproject/phpdepend/workflows/Tests/badge.svg)](https://github.com/czproject/phpdepend/actions)
 
 Extracts list of dependencies (classes, interfaces & traits) from PHP file or code snippet.
 

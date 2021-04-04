@@ -1,10 +1,7 @@
 <?php
-	/**
-	 * @author   Jan Pecha, <janpecha@email.cz>
-	 * @license  New BSD License (BSD-3), see file license.md
-	 */
 
 	namespace CzProject\PhpDepend;
+
 
 	class PhpDepend
 	{
@@ -34,14 +31,12 @@
 		private static $T_TRAIT;
 
 
-
 		public function __construct()
 		{
 			self::$T_NAMESPACE = PHP_VERSION_ID < 50300 ? -1 : T_NAMESPACE;
 			self::$T_NS_SEPARATOR = PHP_VERSION_ID < 50300 ? -1 : T_NS_SEPARATOR;
 			self::$T_TRAIT = PHP_VERSION_ID < 50400 ? -1 : T_TRAIT;
 		}
-
 
 
 		/**
@@ -54,7 +49,6 @@
 		}
 
 
-
 		/**
 		 * Returns list of required classes, interfaces & traits or NULL.
 		 * @return string[]|NULL
@@ -63,7 +57,6 @@
 		{
 			return array_keys($this->dependencies);
 		}
-
 
 
 		/**
@@ -83,7 +76,6 @@
 
 			return FALSE;
 		}
-
 
 
 		/**
@@ -170,7 +162,6 @@
 		}
 
 
-
 		/**
 		 * @param  string
 		 * @return array
@@ -179,7 +170,6 @@
 		{
 			return token_get_all($str);
 		}
-
 
 
 		/**
@@ -210,7 +200,6 @@
 		}
 
 
-
 		/**
 		 * @param  string|string[]
 		 * @return $this
@@ -239,7 +228,6 @@
 		}
 
 
-
 		/**
 		 * @return string|array|FALSE
 		 */
@@ -251,7 +239,6 @@
 		}
 
 
-
 		/**
 		 * @return string|array|FALSE
 		 */
@@ -261,7 +248,6 @@
 		}
 
 
-
 		/**
 		 * @return string|FALSE
 		 */
@@ -269,7 +255,6 @@
 		{
 			return $this->expandName($this->readIdentifier(TRUE));
 		}
-
 
 
 		/**
@@ -293,7 +278,6 @@
 
 			return $implements;
 		}
-
 
 
 		/**
@@ -335,7 +319,6 @@
 
 			return $name;
 		}
-
 
 
 		/**
@@ -421,7 +404,6 @@
 		}
 
 
-
 		private function readStaticClass()
 		{
 			$name = FALSE;
@@ -462,7 +444,6 @@
 			$this->next(); // consume content after T_DOUBLE_COLON
 			return $name;
 		}
-
 
 
 		private function readTrait()
@@ -513,7 +494,6 @@
 		}
 
 
-
 		/**
 		 * @param  string
 		 * @return string
@@ -535,7 +515,6 @@
 			}
 			return $this->namespace . '\\' . $name;
 		}
-
 
 
 		private static function generateShort($name, $fromRight = FALSE)

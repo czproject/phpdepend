@@ -26,18 +26,6 @@
 		/** @var  array */
 		private $use;
 
-		private static $T_NAMESPACE;
-		private static $T_NS_SEPARATOR;
-		private static $T_TRAIT;
-
-
-		public function __construct()
-		{
-			self::$T_NAMESPACE = PHP_VERSION_ID < 50300 ? -1 : T_NAMESPACE;
-			self::$T_NS_SEPARATOR = PHP_VERSION_ID < 50300 ? -1 : T_NS_SEPARATOR;
-			self::$T_TRAIT = PHP_VERSION_ID < 50400 ? -1 : T_TRAIT;
-		}
-
 
 		/**
 		 * Returns list of defined classes, interfaces & traits or NULL.
@@ -112,7 +100,7 @@
 
 					// define
 					case T_CLASS:
-					case self::$T_TRAIT:
+					case T_TRAIT:
 						$this->inClass = TRUE;
 
 					case T_INTERFACE:
@@ -120,7 +108,7 @@
 						break;
 
 					// namespace
-					case self::$T_NAMESPACE:
+					case T_NAMESPACE:
 						$this->namespace = $this->readIdentifier();
 						$this->use = [];
 						break;
@@ -286,7 +274,7 @@
 
 				switch ($token[0]) {
 					case T_STRING:
-					case self::$T_NS_SEPARATOR:
+					case T_NS_SEPARATOR:
 						$readNamespaceKeyword = FALSE;
 						$name .= $token[1];
 
@@ -392,7 +380,7 @@
 						continue;
 					}
 
-					if (($token[0] === T_STRING || $token[0] === self::$T_NS_SEPARATOR)
+					if (($token[0] === T_STRING || $token[0] === T_NS_SEPARATOR)
 						&& !($token[1] === 'self' || $token[1] === 'parent' || $token[1] === 'static')) {
 						$name = $token[1] . $name;
 						continue;

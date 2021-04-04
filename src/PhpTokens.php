@@ -8,6 +8,9 @@
 		/** @var PhpToken[] */
 		private $tokens;
 
+		/** @var int */
+		private $position = 0;
+
 
 		public function __construct(array $tokens)
 		{
@@ -21,6 +24,10 @@
 					$this->tokens[] = new PhpToken($token[0], $token[1], FALSE);
 				}
 			}
+
+			if (empty($this->tokens)) {
+				throw new InvalidArgumentException('Tokens cannot be empty.');
+			}
 		}
 
 
@@ -29,19 +36,49 @@
 		 */
 		public function next()
 		{
-			$next = current($this->tokens);
-			next($this->tokens);
-			return $next !== FALSE ? $next : NULL;
+			if (!isset($this->tokens[$this->position])) {
+				return NULL;
+			}
+
+			$next = $this->tokens[$this->position];
+			$this->nextPosition();
+			return $next;
 		}
 
 
 		/**
-		 * @return PhpToken|NULL
+		 * @return PhpToken
 		 */
 		public function prev()
 		{
-			$token = prev($this->tokens);
-			return $token !== FALSE ? $token : NULL;
+			$this->prevPosition();
+			return $this->tokens[$this->position];
+		}
+
+
+		/**
+		 * @return void
+		 */
+		private function nextPosition()
+		{
+			if (($this->position + 1) > count($this->tokens)) {
+				throw new InvalidStateException('There no next position.');
+			}
+
+			$this->position++;
+		}
+
+
+		/**
+		 * @return void
+		 */
+		private function prevPosition()
+		{
+			if ($this->position === 0) {
+				throw new InvalidStateException('There no prev position.');
+			}
+
+			$this->position--;
 		}
 
 

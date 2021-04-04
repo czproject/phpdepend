@@ -68,8 +68,7 @@
 		{
 			$source = file_get_contents($filename);
 
-			if($source !== FALSE)
-			{
+			if ($source !== FALSE) {
 				$this->parse($source);
 				return TRUE;
 			}
@@ -93,12 +92,10 @@
 			$this->use = [];
 			$this->level = 0;
 
-			while($token = $this->next())
-			{
+			while ($token = $this->next()) {
 				$tokenId = is_array($token) ? $token[0] : $token;
 
-				switch($tokenId)
-				{
+				switch ($tokenId) {
 					// depend
 					case T_NEW:
 					case T_EXTENDS:
@@ -130,28 +127,26 @@
 
 					// USE keywords
 					case T_USE:
-						if($this->inClass) // trait
-						{
+						if ($this->inClass) { // trait
 							$this->addDependency($this->readTrait());
-						}
-						else // namespace
-						{
+
+						} else { // namespace
 							$this->use = array_merge($this->use, $this->readUse());
 						}
+
 						break;
 
 					case '{':
 						$this->level++;
 
-						if($this->inClass === TRUE)
-						{
+						if ($this->inClass === TRUE) {
 							$this->inClass = $this->level;
 						}
+
 						break;
 
 					case '}':
-						if($this->inClass === $this->level)
-						{
+						if ($this->inClass === $this->level) {
 							$this->inClass = FALSE;
 						}
 
@@ -178,19 +173,15 @@
 		 */
 		private function addClass($class)
 		{
-			if($class)
-			{
-				if(!is_array($class))
-				{
+			if ($class) {
+				if (!is_array($class)) {
 					$class = [$class];
 				}
 
-				foreach($class as $name)
-				{
+				foreach ($class as $name) {
 					$name = trim($name, '\\');
 
-					if($name !== '')
-					{
+					if ($name !== '') {
 						$this->classes[] = $name;
 					}
 				}
@@ -206,19 +197,15 @@
 		 */
 		private function addDependency($class)
 		{
-			if($class)
-			{
-				if(!is_array($class))
-				{
+			if ($class) {
+				if (!is_array($class)) {
 					$class = [$class];
 				}
 
-				foreach($class as $name)
-				{
+				foreach ($class as $name) {
 					$name = trim($name, '\\');
 
-					if($name !== '')
-					{
+					if ($name !== '') {
 						$this->dependencies[$name] = TRUE;
 					}
 				}
@@ -264,13 +251,11 @@
 		{
 			$implements = [];
 
-			while(($name = $this->readName()) !== FALSE)
-			{
+			while (($name = $this->readName()) !== FALSE) {
 				$implements[] = $name;
 				$token = $this->next();
 
-				if($token !== ',' && (!is_array($token) && $token[0] !== T_WHITESPACE))
-				{
+				if ($token !== ',' && (!is_array($token) && $token[0] !== T_WHITESPACE)) {
 					$this->prev(); // TODO:??
 					break;
 				}
@@ -287,22 +272,19 @@
 		private function readIdentifier($readNamespaceKeyword = FALSE)
 		{
 			$name = FALSE;
-			while($token = $this->next())
-			{
-				if(!is_array($token))
-				{
+
+			while ($token = $this->next()) {
+				if (!is_array($token)) {
 					$this->prev();
 					break;
 				}
 
-				if($readNamespaceKeyword && $token[0] === T_NAMESPACE)
-				{
+				if ($readNamespaceKeyword && $token[0] === T_NAMESPACE) {
 					$name = '\\' . $this->namespace;
 					continue;
 				}
 
-				switch($token[0])
-				{
+				switch ($token[0]) {
 					case T_STRING:
 					case self::$T_NS_SEPARATOR:
 						$readNamespaceKeyword = FALSE;
@@ -328,13 +310,12 @@
 		{
 			$use = [];
 			$short = FALSE;
-			while($name = $this->readIdentifier())
-			{
+
+			while ($name = $this->readIdentifier()) {
 				$token = $this->next();
 				$wasGroup = FALSE;
 
-				if($token === '{') // group statement
-				{
+				if ($token === '{') { // group statement
 					$wasGroup = TRUE;
 					$nextToken = $this->readUseGroup($name, $use);
 
@@ -345,18 +326,15 @@
 				} else {
 					$short = self::generateShort($name, TRUE);
 
-					if(is_array($token))
-					{
-						if($token[0] === T_AS)
-						{
+					if (is_array($token)) {
+						if ($token[0] === T_AS) {
 							$short = $this->readIdentifier();
 							$token = $this->next();
 						}
 					}
 				}
 
-				if(!$wasGroup && ($token === ',' || $token === ';'))
-				{
+				if (!$wasGroup && ($token === ',' || $token === ';')) {
 					$use[$short] = $name;
 					$short = FALSE;
 				}
@@ -379,17 +357,14 @@
 				$short = self::generateShort($name, TRUE);
 				$token = $this->next();
 
-				if(is_array($token))
-				{
-					if($token[0] === T_AS)
-					{
+				if (is_array($token)) {
+					if ($token[0] === T_AS) {
 						$short = $this->readIdentifier();
 						$token = $this->next();
 					}
 				}
 
-				if($token === ',' || $token === '}')
-				{
+				if ($token === ',' || $token === '}') {
 					$uses[$short] = $rootName . $name;
 					$short = FALSE;
 
@@ -409,19 +384,16 @@
 			$name = FALSE;
 			$i = 0;
 
-			while($token = $this->prev())
-			{
+			while ($token = $this->prev()) {
 				$i++;
-				if(is_array($token))
-				{
-					if($token[0] === T_DOUBLE_COLON)
-					{
+
+				if (is_array($token)) {
+					if ($token[0] === T_DOUBLE_COLON) {
 						continue;
 					}
 
-					if(($token[0] === T_STRING || $token[0] === self::$T_NS_SEPARATOR)
-						&& !($token[1] === 'self' || $token[1] === 'parent' || $token[1] === 'static'))
-					{
+					if (($token[0] === T_STRING || $token[0] === self::$T_NS_SEPARATOR)
+						&& !($token[1] === 'self' || $token[1] === 'parent' || $token[1] === 'static')) {
 						$name = $token[1] . $name;
 						continue;
 					}
@@ -430,13 +402,11 @@
 				break;
 			}
 
-			if($name !== FALSE)
-			{
+			if ($name !== FALSE) {
 				$name = $this->expandName($name);
 			}
 
-			while($i > 0)
-			{
+			while ($i > 0) {
 				$this->next();
 				$i--;
 			}
@@ -450,42 +420,33 @@
 		{
 			$traits = [];
 
-			while($name = $this->readName())
-			{
+			while ($name = $this->readName()) {
 				$traits[] = $name;
 				$token = $this->next();
 
-				if($token === ',' || $token === ';' || $token === '{')
-				{
-					if($token === ';')
-					{
+				if ($token === ',' || $token === ';' || $token === '{') {
+					if ($token === ';') {
 						break;
 					}
 
-					if($token === '{')
-					{
+					if ($token === '{') {
 						$level = 0;
 
-						while($t = $this->next())
-						{
-							if($t === '{')
-							{
+						while ($t = $this->next()) {
+							if ($t === '{') {
 								$level++;
-							}
-							elseif($t === '}')
-							{
+
+							} elseif($t === '}') {
 								$level--;
 
-								if($level < 1)
-								{
+								if ($level < 1) {
 									return $traits;
 								}
 							}
 						}
 					}
-				}
-				else
-				{
+
+				} else {
 					break;
 				}
 			}
@@ -500,19 +461,17 @@
 		 */
 		private function expandName($name)
 		{
-			if($name[0] === '\\' || !$name)
-			{
+			if ($name[0] === '\\' || !$name) {
 				return $name;
-			}
-			else
-			{
+
+			} else {
 				$short = self::generateShort($name);
 
-				if(isset($this->use[$short]))
-				{
+				if (isset($this->use[$short])) {
 					return $this->use[$short] . '\\' . substr($name, strlen($short)+1);
 				}
 			}
+
 			return $this->namespace . '\\' . $name;
 		}
 
@@ -522,14 +481,11 @@
 			$short = trim($name, '\\');
 			$pos = $fromRight ? strrpos($short, '\\') : strpos($short, '\\');
 
-			if($pos !== FALSE)
-			{
-				if($fromRight)
-				{
+			if ($pos !== FALSE) {
+				if ($fromRight) {
 					$short = substr($short, $pos + 1);
-				}
-				else
-				{
+
+				} else {
 					$short = substr($short, 0, $pos);
 				}
 			}

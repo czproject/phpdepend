@@ -1,9 +1,11 @@
 <?php
+
 /**
  * @phpversion >= 5.4
  */
 
 use Tester\Assert;
+
 require __DIR__ . '/bootstrap.php';
 
 $phpdepend = new CzProject\PhpDepend\PhpDepend;

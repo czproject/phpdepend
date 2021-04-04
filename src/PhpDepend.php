@@ -81,9 +81,7 @@
 			$this->level = 0;
 
 			while ($token = $this->tokens->next()) {
-				$tokenId = is_array($token) ? $token[0] : $token;
-
-				switch ($tokenId) {
+				switch ($token->getId()) {
 					// depend
 					case T_NEW:
 					case T_EXTENDS:
@@ -213,7 +211,7 @@
 				$implements[] = $name;
 				$token = $this->tokens->next();
 
-				if ($token !== ',' && (!is_array($token) && $token[0] !== T_WHITESPACE)) {
+				if (!$token->is(',') && ($token->isSimple() && !$token->is(T_WHITESPACE))) {
 					$this->tokens->prev(); // TODO:??
 					break;
 				}
@@ -232,21 +230,21 @@
 			$name = FALSE;
 
 			while ($token = $this->tokens->next()) {
-				if (!is_array($token)) {
+				if ($token->isSimple()) {
 					$this->tokens->prev();
 					break;
 				}
 
-				if ($readNamespaceKeyword && $token[0] === T_NAMESPACE) {
+				if ($readNamespaceKeyword && $token->is(T_NAMESPACE)) {
 					$name = '\\' . $this->namespace;
 					continue;
 				}
 
-				switch ($token[0]) {
+				switch ($token->getId()) {
 					case T_STRING:
 					case T_NS_SEPARATOR:
 						$readNamespaceKeyword = FALSE;
-						$name .= $token[1];
+						$name .= $token->getText();
 
 					case T_WHITESPACE:
 						break;
@@ -273,7 +271,7 @@
 				$token = $this->tokens->next();
 				$wasGroup = FALSE;
 
-				if ($token === '{') { // group statement
+				if ($token->is('{')) { // group statement
 					$wasGroup = TRUE;
 					$nextToken = $this->readUseGroup($name, $use);
 
@@ -284,15 +282,15 @@
 				} else {
 					$short = self::generateShort($name, TRUE);
 
-					if (is_array($token)) {
-						if ($token[0] === T_AS) {
+					if ($token->isComplex()) {
+						if ($token->is(T_AS)) {
 							$short = $this->readIdentifier();
 							$token = $this->tokens->next();
 						}
 					}
 				}
 
-				if (!$wasGroup && ($token === ',' || $token === ';')) {
+				if (!$wasGroup && ($token->is(',') || $token->is(';'))) {
 					$use[$short] = $name;
 					$short = FALSE;
 				}
@@ -315,18 +313,18 @@
 				$short = self::generateShort($name, TRUE);
 				$token = $this->tokens->next();
 
-				if (is_array($token)) {
-					if ($token[0] === T_AS) {
+				if ($token->isComplex()) {
+					if ($token->is(T_AS)) {
 						$short = $this->readIdentifier();
 						$token = $this->tokens->next();
 					}
 				}
 
-				if ($token === ',' || $token === '}') {
+				if ($token->is(',') || $token->is('}')) {
 					$uses[$short] = $rootName . $name;
 					$short = FALSE;
 
-					if ($token === '}') {
+					if ($token->is('}')) {
 						$token = $this->tokens->next();
 						break;
 					}
@@ -345,14 +343,14 @@
 			while ($token = $this->tokens->prev()) {
 				$i++;
 
-				if (is_array($token)) {
-					if ($token[0] === T_DOUBLE_COLON) {
+				if ($token->isComplex()) {
+					if ($token->is(T_DOUBLE_COLON)) {
 						continue;
 					}
 
-					if (($token[0] === T_STRING || $token[0] === T_NS_SEPARATOR)
-						&& !($token[1] === 'self' || $token[1] === 'parent' || $token[1] === 'static')) {
-						$name = $token[1] . $name;
+					if (($token->is(T_STRING) || $token->is(T_NS_SEPARATOR))
+						&& !($token->isText('self') || $token->isText('parent') || $token->isText('static'))) {
+						$name = $token->getText() . $name;
 						continue;
 					}
 				}
@@ -382,19 +380,19 @@
 				$traits[] = $name;
 				$token = $this->tokens->next();
 
-				if ($token === ',' || $token === ';' || $token === '{') {
-					if ($token === ';') {
+				if ($token->is(',') || $token->is(';') || $token->is('{')) {
+					if ($token->is(';')) {
 						break;
 					}
 
-					if ($token === '{') {
+					if ($token->is('{')) {
 						$level = 0;
 
 						while ($t = $this->tokens->next()) {
-							if ($t === '{') {
+							if ($t->is('{')) {
 								$level++;
 
-							} elseif($t === '}') {
+							} elseif($t->is('}')) {
 								$level--;
 
 								if ($level < 1) {

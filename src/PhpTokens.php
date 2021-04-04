@@ -5,33 +5,43 @@
 
 	class PhpTokens
 	{
-		/** @var  array */
+		/** @var PhpToken[] */
 		private $tokens;
 
 
 		public function __construct(array $tokens)
 		{
-			$this->tokens = $tokens;
+			$this->tokens = [];
+
+			foreach ($tokens as $token) {
+				if (is_string($token)) {
+					$this->tokens[] = new PhpToken($token, $token, TRUE);
+
+				} else {
+					$this->tokens[] = new PhpToken($token[0], $token[1], FALSE);
+				}
+			}
 		}
 
 
 		/**
-		 * @return string|array|FALSE
+		 * @return PhpToken|NULL
 		 */
 		public function next()
 		{
 			$next = current($this->tokens);
 			next($this->tokens);
-			return $next;
+			return $next !== FALSE ? $next : NULL;
 		}
 
 
 		/**
-		 * @return string|array|FALSE
+		 * @return PhpToken|NULL
 		 */
 		public function prev()
 		{
-			return prev($this->tokens);
+			$token = prev($this->tokens);
+			return $token !== FALSE ? $token : NULL;
 		}
 
 

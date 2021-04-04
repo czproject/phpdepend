@@ -10,7 +10,7 @@
 		}
 	],
 	"autoload": {
-		"classmap": ["src/PhpDepend.php"]
+		"classmap": ["src/"]
 	},
 	"require": {
 		"php": ">=5.6.0",

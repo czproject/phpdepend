@@ -17,7 +17,7 @@
 		/** @var  string[] */
 		private $dependencies;
 
-		/** @var  array */
+		/** @var  PhpTokens */
 		private $tokens;
 
 		/** @var  int */
@@ -72,7 +72,7 @@
 		 */
 		public function parse($str)
 		{
-			$this->tokens = $this->tokensFromSource($str);
+			$this->tokens = PhpTokens::fromSource($str);
 			$this->inClass = FALSE;
 			$this->namespace = '';
 			$this->classes = [];
@@ -80,7 +80,7 @@
 			$this->use = [];
 			$this->level = 0;
 
-			while ($token = $this->next()) {
+			while ($token = $this->tokens->next()) {
 				$tokenId = is_array($token) ? $token[0] : $token;
 
 				switch ($tokenId) {
@@ -146,16 +146,6 @@
 
 
 		/**
-		 * @param  string
-		 * @return array
-		 */
-		private function tokensFromSource($str)
-		{
-			return token_get_all($str);
-		}
-
-
-		/**
 		 * @param  string|string[]
 		 * @return $this
 		 */
@@ -204,26 +194,6 @@
 
 
 		/**
-		 * @return string|array|FALSE
-		 */
-		private function next()
-		{
-			$next = current($this->tokens);
-			next($this->tokens);
-			return $next;
-		}
-
-
-		/**
-		 * @return string|array|FALSE
-		 */
-		private function prev()
-		{
-			return prev($this->tokens);
-		}
-
-
-		/**
 		 * @return string|FALSE
 		 */
 		private function readName()
@@ -241,10 +211,10 @@
 
 			while (($name = $this->readName()) !== FALSE) {
 				$implements[] = $name;
-				$token = $this->next();
+				$token = $this->tokens->next();
 
 				if ($token !== ',' && (!is_array($token) && $token[0] !== T_WHITESPACE)) {
-					$this->prev(); // TODO:??
+					$this->tokens->prev(); // TODO:??
 					break;
 				}
 			}
@@ -261,9 +231,9 @@
 		{
 			$name = FALSE;
 
-			while ($token = $this->next()) {
+			while ($token = $this->tokens->next()) {
 				if (!is_array($token)) {
-					$this->prev();
+					$this->tokens->prev();
 					break;
 				}
 
@@ -282,7 +252,7 @@
 						break;
 
 					default:
-						$this->prev();
+						$this->tokens->prev();
 						return $name;
 				}
 			}
@@ -300,7 +270,7 @@
 			$short = FALSE;
 
 			while ($name = $this->readIdentifier()) {
-				$token = $this->next();
+				$token = $this->tokens->next();
 				$wasGroup = FALSE;
 
 				if ($token === '{') { // group statement
@@ -317,7 +287,7 @@
 					if (is_array($token)) {
 						if ($token[0] === T_AS) {
 							$short = $this->readIdentifier();
-							$token = $this->next();
+							$token = $this->tokens->next();
 						}
 					}
 				}
@@ -343,12 +313,12 @@
 
 			while ($name = $this->readIdentifier()) {
 				$short = self::generateShort($name, TRUE);
-				$token = $this->next();
+				$token = $this->tokens->next();
 
 				if (is_array($token)) {
 					if ($token[0] === T_AS) {
 						$short = $this->readIdentifier();
-						$token = $this->next();
+						$token = $this->tokens->next();
 					}
 				}
 
@@ -357,7 +327,7 @@
 					$short = FALSE;
 
 					if ($token === '}') {
-						$token = $this->next();
+						$token = $this->tokens->next();
 						break;
 					}
 				}
@@ -372,7 +342,7 @@
 			$name = FALSE;
 			$i = 0;
 
-			while ($token = $this->prev()) {
+			while ($token = $this->tokens->prev()) {
 				$i++;
 
 				if (is_array($token)) {
@@ -395,11 +365,11 @@
 			}
 
 			while ($i > 0) {
-				$this->next();
+				$this->tokens->next();
 				$i--;
 			}
 
-			$this->next(); // consume content after T_DOUBLE_COLON
+			$this->tokens->next(); // consume content after T_DOUBLE_COLON
 			return $name;
 		}
 
@@ -410,7 +380,7 @@
 
 			while ($name = $this->readName()) {
 				$traits[] = $name;
-				$token = $this->next();
+				$token = $this->tokens->next();
 
 				if ($token === ',' || $token === ';' || $token === '{') {
 					if ($token === ';') {
@@ -420,7 +390,7 @@
 					if ($token === '{') {
 						$level = 0;
 
-						while ($t = $this->next()) {
+						while ($t = $this->tokens->next()) {
 							if ($t === '{') {
 								$level++;
 

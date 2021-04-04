@@ -26,13 +26,13 @@ class ezcReflectionFunction extends ReflectionFunction {
 }
 ");
 
-Assert::same(array(
+Assert::same([
 	'ezcReflectionReturnInfo',
 	'ezcReflectionMethod',
 	'ezcReflectionFunction',
-), $phpdepend->getClasses());
-Assert::same(array(
+], $phpdepend->getClasses());
+Assert::same([
 	'ReflectionMethod',
 	'ezcReflectionReturnInfo',
 	'ReflectionFunction',
-), $phpdepend->getDependencies());
+], $phpdepend->getDependencies());

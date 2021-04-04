@@ -35,15 +35,15 @@ $o->sayHello();
 $o->sayWorld();
 ');
 
-Assert::same(array(
+Assert::same([
 	'Hello',
 	'World',
 	'HelloWorld',
 	'MyHelloWorld',
-), $phpdepend->getClasses());
-Assert::same(array(
+], $phpdepend->getClasses());
+Assert::same([
 	'Hello',
 	'World',
 	'HelloWorld',
 	'MyHelloWorld',
-), $phpdepend->getDependencies());
+], $phpdepend->getDependencies());

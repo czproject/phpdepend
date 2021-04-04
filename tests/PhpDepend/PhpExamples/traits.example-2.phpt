@@ -31,13 +31,13 @@ $oh = new MyHelloWorld();
 $oh->sayHello();
 ');
 
-Assert::same(array(
+Assert::same([
 	'Base',
 	'SayWorld',
 	'MyHelloWorld',
-), $phpdepend->getClasses());
-Assert::same(array(
+], $phpdepend->getClasses());
+Assert::same([
 	'Base',
 	'SayWorld',
 	'MyHelloWorld',
-), $phpdepend->getDependencies());
+], $phpdepend->getDependencies());

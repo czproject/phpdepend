@@ -7,8 +7,8 @@ $phpdepend = new Cz\PhpDepend;
 
 // Empty PHP file
 $phpdepend->parse('<?php');
-Assert::same(array(), $phpdepend->getClasses());
-Assert::same(array(), $phpdepend->getDependencies());
+Assert::same([], $phpdepend->getClasses());
+Assert::same([], $phpdepend->getDependencies());
 
 
 // Basic class definition
@@ -18,8 +18,8 @@ class MyClass
 }
 ');
 
-Assert::same(array('MyClass'), $phpdepend->getClasses());
-Assert::same(array(), $phpdepend->getDependencies());
+Assert::same(['MyClass'], $phpdepend->getClasses());
+Assert::same([], $phpdepend->getDependencies());
 
 
 // Basic class definition in namespace
@@ -27,8 +27,8 @@ $phpdepend->parse('<?php
 namespace Foo\\Bar;
 class MyClass {}');
 
-Assert::same(array('Foo\\Bar\\MyClass'), $phpdepend->getClasses());
-Assert::same(array(), $phpdepend->getDependencies());
+Assert::same(['Foo\\Bar\\MyClass'], $phpdepend->getClasses());
+Assert::same([], $phpdepend->getDependencies());
 
 
 // Class definition
@@ -39,8 +39,8 @@ class MyClass extends namespace\MyParent implements namespace\MyInterface {
 }
 ');
 
-Assert::same(array('Foo\\Bar\\MyClass'), $phpdepend->getClasses());
-Assert::same(array(
+Assert::same(['Foo\\Bar\\MyClass'], $phpdepend->getClasses());
+Assert::same([
 	'Foo\Bar\MyParent',
 	'Foo\Bar\MyInterface',
-), $phpdepend->getDependencies());
+], $phpdepend->getDependencies());

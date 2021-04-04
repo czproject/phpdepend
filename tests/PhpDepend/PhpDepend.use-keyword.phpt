@@ -14,8 +14,8 @@ class MyClass implements SubClass
 }
 ');
 
-Assert::same(array('MyClass'), $phpdepend->getClasses());
-Assert::same(array('MyNamespace\Sub\SubClass'), $phpdepend->getDependencies());
+Assert::same(['MyClass'], $phpdepend->getClasses());
+Assert::same(['MyNamespace\Sub\SubClass'], $phpdepend->getDependencies());
 
 
 // multiuse
@@ -28,11 +28,11 @@ class MyClass3 extends NS9\ParentClass implements NS6\FooInterface
 }
 ');
 
-Assert::same(array('MyClass3'), $phpdepend->getClasses());
-Assert::same(array(
+Assert::same(['MyClass3'], $phpdepend->getClasses());
+Assert::same([
 	'NS4\NS5\NS7\ParentClass',
 	'NS4\NS5\NS6\FooInterface',
-), $phpdepend->getDependencies());
+], $phpdepend->getDependencies());
 
 
 // conflicts
@@ -54,16 +54,16 @@ class MyClass2 extends NS9\ParentClass implements NS6\FooInterface
 }
 ');
 
-Assert::same(array(
+Assert::same([
 	'First\MyClass1',
 	'Second\MyClass2',
-), $phpdepend->getClasses());
+], $phpdepend->getClasses());
 
-Assert::same(array(
+Assert::same([
 	// first
 	'NS4\NS5\NS7\ParentClass',
 	'NS4\NS5\NS6\FooInterface',
 	// second
 	'Second\NS9\ParentClass',
 	'MYNS\NS6\FooInterface',
-), $phpdepend->getDependencies());
+], $phpdepend->getDependencies());

@@ -35,13 +35,13 @@ $o->sayWorld();
 $o->sayExclamationMark();
 ');
 
-Assert::same(array(
+Assert::same([
 	'Hello',
 	'World',
 	'MyHelloWorld',
-), $phpdepend->getClasses());
-Assert::same(array(
+], $phpdepend->getClasses());
+Assert::same([
 	'Hello',
 	'World',
 	'MyHelloWorld',
-), $phpdepend->getDependencies());
+], $phpdepend->getDependencies());

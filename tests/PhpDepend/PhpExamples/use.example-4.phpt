@@ -15,10 +15,10 @@ $obj = new Another\thing; // instantiates object of class My\Full\Classname\thin
 $obj = new \Another\thing; // instantiates object of class Another\thing
 ');
 
-Assert::same(array(), $phpdepend->getClasses());
-Assert::same(array(
+Assert::same([], $phpdepend->getClasses());
+Assert::same([
 	'My\Full\Classname',
 	'Another',
 	'My\Full\Classname\thing',
 	'Another\thing'
-), $phpdepend->getDependencies());
+], $phpdepend->getDependencies());

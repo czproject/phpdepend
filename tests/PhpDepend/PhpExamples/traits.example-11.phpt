@@ -22,11 +22,11 @@ $example = new PropertiesExample;
 $example->x;
 ');
 
-Assert::same(array(
+Assert::same([
 	'PropertiesTrait',
 	'PropertiesExample',
-), $phpdepend->getClasses());
-Assert::same(array(
+], $phpdepend->getClasses());
+Assert::same([
 	'PropertiesTrait',
 	'PropertiesExample',
-), $phpdepend->getDependencies());
+], $phpdepend->getDependencies());

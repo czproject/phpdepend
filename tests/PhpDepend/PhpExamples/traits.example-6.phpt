@@ -28,11 +28,11 @@ class MyClass2 {
 }
 ");
 
-Assert::same(array(
+Assert::same([
 	'HelloWorld',
 	'MyClass1',
 	'MyClass2',
-), $phpdepend->getClasses());
-Assert::same(array(
+], $phpdepend->getClasses());
+Assert::same([
 	'HelloWorld',
-), $phpdepend->getDependencies());
+], $phpdepend->getDependencies());

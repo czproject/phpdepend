@@ -96,9 +96,9 @@
 			$this->tokens = $this->tokensFromSource($str);
 			$this->inClass = FALSE;
 			$this->namespace = '';
-			$this->classes = array();
-			$this->dependencies = array();
-			$this->use = array();
+			$this->classes = [];
+			$this->dependencies = [];
+			$this->use = [];
 			$this->level = 0;
 
 			while($token = $this->next())
@@ -133,7 +133,7 @@
 					// namespace
 					case self::$T_NAMESPACE:
 						$this->namespace = $this->readIdentifier();
-						$this->use = array();
+						$this->use = [];
 						break;
 
 					// USE keywords
@@ -192,7 +192,7 @@
 			{
 				if(!is_array($class))
 				{
-					$class = array($class);
+					$class = [$class];
 				}
 
 				foreach($class as $name)
@@ -221,7 +221,7 @@
 			{
 				if(!is_array($class))
 				{
-					$class = array($class);
+					$class = [$class];
 				}
 
 				foreach($class as $name)
@@ -277,7 +277,7 @@
 		 */
 		private function readImplements()
 		{
-			$implements = array();
+			$implements = [];
 
 			while(($name = $this->readName()) !== FALSE)
 			{
@@ -343,7 +343,7 @@
 		 */
 		private function readUse()
 		{
-			$use = array();
+			$use = [];
 			$short = FALSE;
 			while($name = $this->readIdentifier())
 			{
@@ -467,7 +467,7 @@
 
 		private function readTrait()
 		{
-			$traits = array();
+			$traits = [];
 
 			while($name = $this->readName())
 			{

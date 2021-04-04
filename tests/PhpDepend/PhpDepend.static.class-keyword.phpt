@@ -29,13 +29,13 @@ class MyClass
 echo MyClass::class;
 ');
 
-Assert::same(array(
+Assert::same([
 	'MyName\Space\MyClass',
-), $phpdepend->getClasses());
+], $phpdepend->getClasses());
 
-Assert::same(array(
+Assert::same([
 	'Bar',
 	'Foo',
 	'Bar\FooBar',
 	'MyName\Space\MyClass',
-), $phpdepend->getDependencies());
+], $phpdepend->getDependencies());

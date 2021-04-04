@@ -14,10 +14,10 @@ use function some\ns\fn_a;
 $a = new fn_a;
 ');
 
-Assert::same(array(), $phpdepend->getClasses());
-Assert::same(array(
+Assert::same([], $phpdepend->getClasses());
+Assert::same([
 	'fn_a',
-), $phpdepend->getDependencies());
+], $phpdepend->getDependencies());
 
 
 // grouped
@@ -28,8 +28,8 @@ $a = new funcA;
 $a = new funcB;
 ');
 
-Assert::same(array(), $phpdepend->getClasses());
-Assert::same(array(
+Assert::same([], $phpdepend->getClasses());
+Assert::same([
 	'funcA',
 	'funcB',
-), $phpdepend->getDependencies());
+], $phpdepend->getDependencies());

@@ -29,10 +29,10 @@ class MyHelloWorld {
 }
 ');
 
-Assert::same(array(
+Assert::same([
 	'Hello',
 	'MyHelloWorld',
-), $phpdepend->getClasses());
-Assert::same(array(
+], $phpdepend->getClasses());
+Assert::same([
 	'Hello',
-), $phpdepend->getDependencies());
+], $phpdepend->getDependencies());

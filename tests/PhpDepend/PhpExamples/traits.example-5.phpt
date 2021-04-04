@@ -44,13 +44,13 @@ class Aliased_Talker {
 }
 ");
 
-Assert::same(array(
+Assert::same([
 	'A',
 	'B',
 	'Talker',
 	'Aliased_Talker',
-), $phpdepend->getClasses());
-Assert::same(array(
+], $phpdepend->getClasses());
+Assert::same([
 	'A',
 	'B',
-), $phpdepend->getDependencies());
+], $phpdepend->getDependencies());

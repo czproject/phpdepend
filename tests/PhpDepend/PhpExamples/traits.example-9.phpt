@@ -30,13 +30,13 @@ $o = new C1(); $o->inc(); // echo 1
 $p = new C2(); $p->inc(); // echo 1
 ');
 
-Assert::same(array(
+Assert::same([
 	'Counter',
 	'C1',
 	'C2',
-), $phpdepend->getClasses());
-Assert::same(array(
+], $phpdepend->getClasses());
+Assert::same([
 	'Counter',
 	'C1',
 	'C2',
-), $phpdepend->getDependencies());
+], $phpdepend->getDependencies());

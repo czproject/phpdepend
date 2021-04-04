@@ -18,8 +18,8 @@ class MyClass
 }
 ');
 
-Assert::same(array('MyClass'), $phpdepend->getClasses());
-Assert::same(array(), $phpdepend->getDependencies());
+Assert::same(['MyClass'], $phpdepend->getClasses());
+Assert::same([], $phpdepend->getDependencies());
 
 
 
@@ -37,5 +37,5 @@ class MyClass
 }
 ');
 
-Assert::same(array('MyClass'), $phpdepend->getClasses());
-Assert::same(array('Foo\Bar', 'Foo', 'Foo\Bar\FooBar'), $phpdepend->getDependencies());
+Assert::same(['MyClass'], $phpdepend->getClasses());
+Assert::same(['Foo\Bar', 'Foo', 'Foo\Bar\FooBar'], $phpdepend->getDependencies());

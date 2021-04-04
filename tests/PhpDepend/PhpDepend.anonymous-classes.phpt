@@ -37,8 +37,8 @@ $util->setLogger(new class {
 });
 ');
 
-Assert::same(array('Logger'), $phpdepend->getClasses());
-Assert::same(array('Logger'), $phpdepend->getDependencies());
+Assert::same(['Logger'], $phpdepend->getClasses());
+Assert::same(['Logger'], $phpdepend->getDependencies());
 
 
 /////////////////////////
@@ -60,17 +60,17 @@ var_dump(new class(10) extends SomeClass implements SomeInterface {
 });
 ');
 
-Assert::same(array(
+Assert::same([
 	'SomeClass',
 	'SomeInterface',
 	'SomeTrait',
-), $phpdepend->getClasses());
+], $phpdepend->getClasses());
 
-Assert::same(array(
+Assert::same([
 	'SomeClass',
 	'SomeInterface',
 	'SomeTrait',
-), $phpdepend->getDependencies());
+], $phpdepend->getDependencies());
 
 
 /////////////////////////
@@ -107,8 +107,8 @@ class Outer
 echo (new Outer)->func2()->func3();
 ');
 
-Assert::same(array('Outer'), $phpdepend->getClasses());
-Assert::same(array('Outer'), $phpdepend->getDependencies());
+Assert::same(['Outer'], $phpdepend->getClasses());
+Assert::same(['Outer'], $phpdepend->getDependencies());
 
 
 /////////////////////////
@@ -125,8 +125,8 @@ if (get_class(anonymous_class()) === get_class(anonymous_class())) {
 }
 ');
 
-Assert::same(array(), $phpdepend->getClasses());
-Assert::same(array(), $phpdepend->getDependencies());
+Assert::same([], $phpdepend->getClasses());
+Assert::same([], $phpdepend->getDependencies());
 
 
 /////////////////////////
@@ -135,5 +135,5 @@ echo get_class(new class {});
 }
 ');
 
-Assert::same(array(), $phpdepend->getClasses());
-Assert::same(array(), $phpdepend->getDependencies());
+Assert::same([], $phpdepend->getClasses());
+Assert::same([], $phpdepend->getDependencies());

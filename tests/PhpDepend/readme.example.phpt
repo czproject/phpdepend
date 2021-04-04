@@ -20,12 +20,12 @@ $phpdepend->parse('
 	$greeting->say(\'John\');
 ');
 
-Assert::same(array(
+Assert::same([
 	'Greeting',
-), $phpdepend->getClasses());
+], $phpdepend->getClasses());
 
-Assert::same(array(
+Assert::same([
 	'IGreeting',
 	'InvalidArgumentException',
 	'Greeting',
-), $phpdepend->getDependencies());
+], $phpdepend->getDependencies());

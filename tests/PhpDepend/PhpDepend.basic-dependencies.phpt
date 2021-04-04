@@ -11,8 +11,8 @@ $foo = new Foo;
 $bar = new Bar;
 ');
 
-Assert::same(array(), $phpdepend->getClasses());
-Assert::same(array('Foo', 'Bar'), $phpdepend->getDependencies());
+Assert::same([], $phpdepend->getClasses());
+Assert::same(['Foo', 'Bar'], $phpdepend->getDependencies());
 
 
 // Basic class definition in namespace
@@ -23,9 +23,9 @@ $bar = new Bar;
 $barfoo = new namespace\BarFoo;
 ');
 
-Assert::same(array(), $phpdepend->getClasses());
-Assert::same(array(
+Assert::same([], $phpdepend->getClasses());
+Assert::same([
 	'Foo\\Bar\\Foo',
 	'Foo\\Bar\\Bar',
 	'Foo\\Bar\\BarFoo',
-), $phpdepend->getDependencies());
+], $phpdepend->getDependencies());

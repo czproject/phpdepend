@@ -17,8 +17,8 @@ class MyClass implements IMyInterface
 }
 ');
 
-Assert::same(array('IMyInterface', 'MyClass'), $phpdepend->getClasses());
-Assert::same(array('IMyInterface'), $phpdepend->getDependencies());
+Assert::same(['IMyInterface', 'MyClass'], $phpdepend->getClasses());
+Assert::same(['IMyInterface'], $phpdepend->getDependencies());
 
 
 
@@ -34,7 +34,7 @@ class MyClass extends Foo\Bar\Object implements IMyInterface
 }
 ');
 
-Assert::same(array('IMyInterface', 'MyClass'), $phpdepend->getClasses());
-Assert::same(array(
+Assert::same(['IMyInterface', 'MyClass'], $phpdepend->getClasses());
+Assert::same([
 	'Foo\Bar\FooBar', 'Foo\Bar\Object', 'IMyInterface'
-), $phpdepend->getDependencies());
+], $phpdepend->getDependencies());

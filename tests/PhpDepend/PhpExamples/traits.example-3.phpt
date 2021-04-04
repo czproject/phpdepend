@@ -27,11 +27,11 @@ $o = new TheWorldIsNotEnough();
 $o->sayHello();
 ');
 
-Assert::same(array(
+Assert::same([
 	'HelloWorld',
 	'TheWorldIsNotEnough',
-), $phpdepend->getClasses());
-Assert::same(array(
+], $phpdepend->getClasses());
+Assert::same([
 	'HelloWorld',
 	'TheWorldIsNotEnough',
-), $phpdepend->getDependencies());
+], $phpdepend->getDependencies());

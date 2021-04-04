@@ -7,7 +7,7 @@ $phpdepend = new Cz\PhpDepend;
 
 // Existing file
 Assert::true($phpdepend->parseFile(__DIR__ . '/basic.inc.php'));
-Assert::same(array('MyClass'), $phpdepend->getClasses());
+Assert::same(['MyClass'], $phpdepend->getClasses());
 
 
 // Missing file

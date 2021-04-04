@@ -26,8 +26,8 @@ $a = new ConstB; // ConstB
 $a = new ConstC; // ConstC
 ');
 
-Assert::same(array(), $phpdepend->getClasses());
-Assert::same(array(
+Assert::same([], $phpdepend->getClasses());
+Assert::same([
 	'some\ns\ClassA',
 	'some\ns\ClassB',
 	'ClassC',
@@ -38,7 +38,7 @@ Assert::same(array(
 	'ConstA',
 	'ConstB',
 	'ConstC',
-), $phpdepend->getDependencies());
+], $phpdepend->getDependencies());
 
 
 // spaces
@@ -51,13 +51,13 @@ $a = new ClassC; // ClassC
 $a = new C; // some\ns\ClassC
 ');
 
-Assert::same(array(), $phpdepend->getClasses());
-Assert::same(array(
+Assert::same([], $phpdepend->getClasses());
+Assert::same([
 	'some\ns\ClassA',
 	'some\ns\ClassB',
 	'ClassC',
 	'some\ns\ClassC',
-), $phpdepend->getDependencies());
+], $phpdepend->getDependencies());
 
 
 // subpath
@@ -69,9 +69,9 @@ $a = new C;
 $a = new D;
 ');
 
-Assert::same(array(), $phpdepend->getClasses());
-Assert::same(array(
+Assert::same([], $phpdepend->getClasses());
+Assert::same([
 	'A\B\A',
 	'A\B\B\C',
 	'A\B\C',
-), $phpdepend->getDependencies());
+], $phpdepend->getDependencies());

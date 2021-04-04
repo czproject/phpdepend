@@ -26,12 +26,12 @@ $phpdepend->parse('<?php
 	}
 ');
 
-Assert::same(array(
+Assert::same([
 	'ezcReflectionReturnInfo', 'ezcReflectionMethod', 'ezcReflectionFunction'
-), $phpdepend->getClasses());
-Assert::same(array(
+], $phpdepend->getClasses());
+Assert::same([
 	'ReflectionMethod', 'ezcReflectionReturnInfo', 'ReflectionFunction'
-), $phpdepend->getDependencies());
+], $phpdepend->getDependencies());
 
 
 
@@ -48,8 +48,8 @@ $phpdepend->parse('<?php
 	}
 ');
 
-Assert::same(array('Hello', 'World', 'MyHelloWorld'), $phpdepend->getClasses());
-Assert::same(array('Hello', 'World'), $phpdepend->getDependencies());
+Assert::same(['Hello', 'World', 'MyHelloWorld'], $phpdepend->getClasses());
+Assert::same(['Hello', 'World'], $phpdepend->getDependencies());
 
 
 
@@ -67,5 +67,5 @@ $phpdepend->parse('<?php
 	}
 ');
 
-Assert::same(array('HelloWorld', 'MyClass1', 'MyClass2'), $phpdepend->getClasses());
-Assert::same(array('HelloWorld'), $phpdepend->getDependencies());
+Assert::same(['HelloWorld', 'MyClass1', 'MyClass2'], $phpdepend->getClasses());
+Assert::same(['HelloWorld'], $phpdepend->getDependencies());

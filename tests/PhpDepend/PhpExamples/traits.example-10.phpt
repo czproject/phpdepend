@@ -23,11 +23,11 @@ class Example {
 Example::doSomething();
 ');
 
-Assert::same(array(
+Assert::same([
 	'StaticExample',
 	'Example',
-), $phpdepend->getClasses());
-Assert::same(array(
+], $phpdepend->getClasses());
+Assert::same([
 	'StaticExample',
 	'Example',
-), $phpdepend->getDependencies());
+], $phpdepend->getDependencies());

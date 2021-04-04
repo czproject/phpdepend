@@ -13,7 +13,7 @@ $obj = new Another; // instantiates object of class My\Full\Classname
 NSname\subns\func(); // calls function My\Full\NSname\subns\func
 ');
 
-Assert::same(array(), $phpdepend->getClasses());
-Assert::same(array(
+Assert::same([], $phpdepend->getClasses());
+Assert::same([
 	'My\Full\Classname',
-), $phpdepend->getDependencies());
+], $phpdepend->getDependencies());

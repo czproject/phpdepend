@@ -14,7 +14,7 @@ use const My\Full\CONSTANT;
 $a = new CONSTANT;
 ');
 
-Assert::same(array(), $phpdepend->getClasses());
-Assert::same(array(
+Assert::same([], $phpdepend->getClasses());
+Assert::same([
 	'CONSTANT',
-), $phpdepend->getDependencies());
+], $phpdepend->getDependencies());

@@ -37,9 +37,9 @@ func(); // calls function My\Full\functionName
 echo CONSTANT; // echoes the value of My\Full\CONSTANT
 ');
 
-Assert::same(array(), $phpdepend->getClasses());
-Assert::same(array(
+Assert::same([], $phpdepend->getClasses());
+Assert::same([
 	'foo\Another',
 	'My\Full\Classname',
 	'ArrayObject',
-), $phpdepend->getDependencies());
+], $phpdepend->getDependencies());

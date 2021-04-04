@@ -37,20 +37,20 @@ namespace # global namespace
 }
 ');
 
-Assert::same(array(
+Assert::same([
 	'NS1\MyClass',
 	'NS2\MyClass2',
 	'NS3\MyClass3',
 	'MyGlobalClass',
-), $phpdepend->getClasses());
+], $phpdepend->getClasses());
 
-Assert::same(array(
+Assert::same([
 	'NS1\MyInterface',
 	'NS2\NS3\ParentClass',
 	'NS4\NS5\NS7\ParentClass',
 	'NS4\NS5\NS6\FooInterface',
 	'NS1\NS3\ParentClass2',
-), $phpdepend->getDependencies());
+], $phpdepend->getDependencies());
 
 
 
@@ -79,17 +79,17 @@ namespace; # global namespace
 	}
 ');
 
-Assert::same(array(
+Assert::same([
 	'NFirst\MyClass',
 	'NSecond\MyClass2',
 	'NThird\MyClass3',
 	'MyGlobalClass',
-), $phpdepend->getClasses());
+], $phpdepend->getClasses());
 
-Assert::same(array(
+Assert::same([
 	'NFirst\MyInterface',
 	'NSecond\NThird\ParentClass',
 	'NS4\NS5\NS7\ParentClass',
 	'NS4\NS5\NS6\FooInterface',
 	'NS1\NS3\ParentClass2',
-), $phpdepend->getDependencies());
+], $phpdepend->getDependencies());

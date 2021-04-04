@@ -4,7 +4,7 @@
 	 * @license  New BSD License (BSD-3), see file license.md
 	 */
 
-	namespace Cz;
+	namespace CzProject\PhpDepend;
 
 	class PhpDepend
 	{

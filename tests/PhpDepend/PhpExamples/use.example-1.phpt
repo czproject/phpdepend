@@ -5,7 +5,7 @@
 use Tester\Assert;
 require __DIR__ . '/../bootstrap.php';
 
-$phpdepend = new Cz\PhpDepend;
+$phpdepend = new CzProject\PhpDepend\PhpDepend;
 
 // Example #1
 // http://php.net/manual/en/language.namespaces.importing.php

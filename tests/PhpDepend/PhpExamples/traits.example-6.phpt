@@ -5,7 +5,7 @@
 use Tester\Assert;
 require __DIR__ . '/../bootstrap.php';
 
-$phpdepend = new Cz\PhpDepend;
+$phpdepend = new CzProject\PhpDepend\PhpDepend;
 
 // Example #6 Changing Method Visibility
 // http://www.php.net/manual/en/language.oop5.traits.php

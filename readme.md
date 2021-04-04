@@ -30,7 +30,7 @@ Usage
 -----
 
 ``` php
-$phpdepend = new Cz\PhpDepend;
+$phpdepend = new CzProject\PhpDepend\PhpDepend;
 
 // file parsing
 $phpdepend->parseFile('MyClass.php');
@@ -67,7 +67,7 @@ Example
 
 ``` php
 <?php
-$phpdepend = new Cz\PhpDepend;
+$phpdepend = new CzProject\PhpDepend\PhpDepend;
 $phpdepend->parse('
 <?php
 	class Greeting implements IGreeting

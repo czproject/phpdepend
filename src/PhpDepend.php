@@ -241,6 +241,23 @@
 					break;
 				}
 
+				if (PHP_VERSION_ID >= 80000) {
+					if ($token->is(T_NAME_QUALIFIED)) {
+						$name = $token->getText();
+						continue;
+					}
+
+					if ($token->is(T_NAME_FULLY_QUALIFIED)) {
+						$name = $token->getText();
+						continue;
+					}
+
+					if ($token->is(T_NAME_RELATIVE)) {
+						$name = '\\' . $this->namespace . '\\' . substr($token->getText(), 10);
+						continue;
+					}
+				}
+
 				if ($readNamespaceKeyword && $token->is(T_NAMESPACE)) {
 					$name = '\\' . $this->namespace;
 					continue;
@@ -352,6 +369,13 @@
 				if ($token->isComplex()) {
 					if ($token->is(T_DOUBLE_COLON)) {
 						continue;
+					}
+
+					if (PHP_VERSION_ID >= 80000) {
+						if ($token->is(T_NAME_QUALIFIED) || $token->is(T_NAME_FULLY_QUALIFIED)) {
+							$name = $token->getText();
+							break;
+						}
 					}
 
 					if (($token->is(T_STRING) || $token->is(T_NS_SEPARATOR))

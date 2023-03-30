@@ -196,7 +196,13 @@
 		 */
 		private function readName()
 		{
-			return $this->expandName($this->readIdentifier(TRUE));
+			$name = $this->readIdentifier(TRUE);
+
+			if ($name === FALSE) {
+				return FALSE;
+			}
+
+			return $this->expandName($name);
 		}
 
 

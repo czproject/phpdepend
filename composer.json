@@ -9,6 +9,9 @@
 			"email": "janpecha@email.cz"
 		}
 	],
+	"funding": [
+		{"type": "other", "url": "https://www.janpecha.cz/donate/"}
+	],
 	"autoload": {
 		"classmap": ["src/"]
 	},

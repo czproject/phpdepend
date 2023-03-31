@@ -1,7 +1,10 @@
 PhpDepend
 =========
 
-[![Tests Status](https://github.com/czproject/phpdepend/workflows/Tests/badge.svg)](https://github.com/czproject/phpdepend/actions)
+[![Build Status](https://github.com/czproject/phpdepend/workflows/Build/badge.svg)](https://github.com/czproject/phpdepend/actions)
+[![Downloads this Month](https://img.shields.io/packagist/dm/czproject/phpdepend.svg)](https://packagist.org/packages/czproject/phpdepend)
+[![Latest Stable Version](https://poser.pugx.org/czproject/phpdepend/v/stable)](https://github.com/czproject/phpdepend/releases)
+[![License](https://img.shields.io/badge/license-New%20BSD-blue.svg)](https://github.com/czproject/phpdepend/blob/master/license.md)
 
 Extracts list of dependencies (classes, interfaces & traits) from PHP file or code snippet.
 

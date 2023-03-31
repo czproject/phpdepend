@@ -12,6 +12,9 @@
 		private $position = 0;
 
 
+		/**
+		 * @param list<array{0: int, 1: string}|string> $tokens
+		 */
 		public function __construct(array $tokens)
 		{
 			$this->tokens = [];
@@ -43,6 +46,21 @@
 			$next = $this->tokens[$this->position];
 			$this->nextPosition();
 			return $next;
+		}
+
+
+		/**
+		 * @return PhpToken
+		 */
+		public function nextToken()
+		{
+			$token = $this->next();
+
+			if ($token === NULL) {
+				throw new InvalidStateException('There is no next token.');
+			}
+
+			return $token;
 		}
 
 

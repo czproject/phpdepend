@@ -14,7 +14,7 @@
 		/** @var  string[] */
 		private $classes;
 
-		/** @var  string[] */
+		/** @var  array<string, TRUE> */
 		private $dependencies;
 
 		/** @var  PhpTokens */
@@ -23,7 +23,7 @@
 		/** @var  int */
 		private $level;
 
-		/** @var  array */
+		/** @var  array<string, string> */
 		private $use;
 
 
@@ -49,7 +49,7 @@
 
 		/**
 		 * Parses content of PHP file.
-		 * @param  string
+		 * @param  string $filename
 		 * @return bool  FALSE => file error
 		 */
 		public function parseFile($filename)
@@ -67,7 +67,7 @@
 
 		/**
 		 * Parses given PHP code.
-		 * @param  string
+		 * @param  string $str
 		 * @return void
 		 */
 		public function parse($str)
@@ -107,7 +107,7 @@
 
 					// namespace
 					case T_NAMESPACE:
-						$this->namespace = $this->readIdentifier();
+						$this->namespace = (string) $this->readIdentifier();
 						$this->use = [];
 						break;
 
@@ -144,7 +144,7 @@
 
 
 		/**
-		 * @param  string|string[]
+		 * @param  string|string[]|FALSE $class
 		 * @return $this
 		 */
 		private function addClass($class)
@@ -168,7 +168,7 @@
 
 
 		/**
-		 * @param  string|string[]
+		 * @param  string|string[]|FALSE $class
 		 * @return $this
 		 */
 		private function addDependency($class)
@@ -215,7 +215,7 @@
 
 			while (($name = $this->readName()) !== FALSE) {
 				$implements[] = $name;
-				$token = $this->tokens->next();
+				$token = $this->tokens->nextToken();
 
 				if (!$token->is(',') && ($token->isSimple() && !$token->is(T_WHITESPACE))) {
 					$this->tokens->prev(); // TODO:??
@@ -228,8 +228,8 @@
 
 
 		/**
-		 * @param  bool
-		 * @return string
+		 * @param  bool $readNamespaceKeyword
+		 * @return string|FALSE
 		 */
 		private function readIdentifier($readNamespaceKeyword = FALSE)
 		{
@@ -283,7 +283,7 @@
 
 
 		/**
-		 * @return array  [short-name => full-class-name, ...]
+		 * @return array<string, string>  [short-name => full-class-name, ...]
 		 */
 		private function readUse()
 		{
@@ -291,7 +291,7 @@
 			$short = FALSE;
 
 			while ($name = $this->readIdentifier()) {
-				$token = $this->tokens->next();
+				$token = $this->tokens->nextToken();
 				$wasGroup = FALSE;
 
 				if ($token->is('{')) { // group statement
@@ -308,7 +308,7 @@
 					if ($token->isComplex()) {
 						if ($token->is(T_AS)) {
 							$short = $this->readIdentifier();
-							$token = $this->tokens->next();
+							$token = $this->tokens->nextToken();
 						}
 					}
 				}
@@ -324,8 +324,9 @@
 
 
 		/**
-		 * @param  string
-		 * @return mixed|NULL  token or NULL
+		 * @param  string $rootName
+		 * @param  array<string, string> $uses
+		 * @return PhpToken|NULL  token or NULL
 		 */
 		private function readUseGroup($rootName, array &$uses)
 		{
@@ -334,12 +335,12 @@
 
 			while ($name = $this->readIdentifier()) {
 				$short = self::generateShort($name, TRUE);
-				$token = $this->tokens->next();
+				$token = $this->tokens->nextToken();
 
 				if ($token->isComplex()) {
 					if ($token->is(T_AS)) {
 						$short = $this->readIdentifier();
-						$token = $this->tokens->next();
+						$token = $this->tokens->nextToken();
 					}
 				}
 
@@ -348,7 +349,7 @@
 					$short = FALSE;
 
 					if ($token->is('}')) {
-						$token = $this->tokens->next();
+						$token = $this->tokens->nextToken();
 						break;
 					}
 				}
@@ -358,6 +359,9 @@
 		}
 
 
+		/**
+		 * @return string|FALSE
+		 */
 		private function readStaticClass()
 		{
 			$name = FALSE;
@@ -393,22 +397,25 @@
 			}
 
 			while ($i > 0) {
-				$this->tokens->next();
+				$this->tokens->nextToken();
 				$i--;
 			}
 
-			$this->tokens->next(); // consume content after T_DOUBLE_COLON
+			$this->tokens->nextToken(); // consume content after T_DOUBLE_COLON
 			return $name;
 		}
 
 
+		/**
+		 * @return string[]
+		 */
 		private function readTrait()
 		{
 			$traits = [];
 
 			while ($name = $this->readName()) {
 				$traits[] = $name;
-				$token = $this->tokens->next();
+				$token = $this->tokens->nextToken();
 
 				if ($token->is(',') || $token->is(';') || $token->is('{')) {
 					if ($token->is(';')) {
@@ -442,7 +449,7 @@
 
 
 		/**
-		 * @param  string
+		 * @param  string $name
 		 * @return string
 		 */
 		private function expandName($name)
@@ -462,6 +469,11 @@
 		}
 
 
+		/**
+		 * @param  string $name
+		 * @param  bool $fromRight
+		 * @return string
+		 */
 		private static function generateShort($name, $fromRight = FALSE)
 		{
 			$short = trim($name, '\\');

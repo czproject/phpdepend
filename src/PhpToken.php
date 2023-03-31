@@ -19,7 +19,6 @@
 		 * @param int|string $id
 		 * @param string $text
 		 * @param bool $simple
-		 * @param int $line
 		 */
 		public function __construct($id, $text, $simple)
 		{

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * Bug https://github.com/czproject/phpdepend/issues/7
  */

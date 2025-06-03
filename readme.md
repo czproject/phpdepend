@@ -20,7 +20,7 @@ Installation
 composer require czproject/phpdepend
 ```
 
-PhpDepend requires PHP 5.6 or later and enabled [Tokenizer extension](http://www.php.net/manual/en/book.tokenizer.php) (enabled by default from PHP 4.3.0).
+PhpDepend requires PHP 8.0 or later and enabled [Tokenizer extension](http://www.php.net/manual/en/book.tokenizer.php) (enabled by default from PHP 4.3.0).
 
 
 Usage

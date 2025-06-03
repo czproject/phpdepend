@@ -16,7 +16,7 @@
 		"classmap": ["src/"]
 	},
 	"require": {
-		"php": ">=5.6.0",
+		"php": "8.0 - 8.4",
 		"ext-tokenizer": "*"
 	},
 	"require-dev": {

@@ -243,7 +243,7 @@
 					break;
 				}
 
-				if (PHP_VERSION_ID >= 80000) {
+				if (PHP_VERSION_ID >= 80000) { // @phpstan-ignore greaterOrEqual.alwaysTrue
 					if ($token->is(T_NAME_QUALIFIED)) {
 						$name = $token->getText();
 						continue;
@@ -316,7 +316,7 @@
 				}
 
 				if (!$wasGroup && ($token->is(',') || $token->is(';'))) {
-					$use[$short] = $name;
+					$use[(string) $short] = $name;
 					$short = FALSE;
 				}
 			}
@@ -347,7 +347,7 @@
 				}
 
 				if ($token->is(',') || $token->is('}')) {
-					$uses[$short] = $rootName . $name;
+					$uses[(string) $short] = $rootName . $name;
 					$short = FALSE;
 
 					if ($token->is('}')) {
@@ -377,7 +377,7 @@
 						continue;
 					}
 
-					if (PHP_VERSION_ID >= 80000) {
+					if (PHP_VERSION_ID >= 80000) { // @phpstan-ignore greaterOrEqual.alwaysTrue
 						if ($token->is(T_NAME_QUALIFIED) || $token->is(T_NAME_FULLY_QUALIFIED)) {
 							$name = $token->getText();
 							break;
